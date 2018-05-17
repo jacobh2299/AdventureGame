@@ -16,7 +16,7 @@ public class AdventureGameController extends BasicGame {
 	// Initialize all of the data members
 
 	// Player
-	int PX = 270, PY = 270;
+	int PX = 270, PY = 270, EX = 500, EY = 500;
 
 	// Initialize Border
 	TileBorder tileBorder = new TileBorder();
@@ -28,6 +28,8 @@ public class AdventureGameController extends BasicGame {
 	// Create DeathScreen
 	Image DeathScreen;
 	boolean drawDeathScreen;
+	boolean isTouching = false;
+
 
 	// Makes the window and connects it to the runner class
 	public void makeWindow() {
@@ -62,9 +64,9 @@ public class AdventureGameController extends BasicGame {
 		arg1.fillRect(PX, PY, 30, 30);
 
 		// Creates Enemy
-		enemy.Enemy1(arg1, 700, 270, 50, 50);
-		// Creates Enemy1
-		// enemy1.Enemy1(arg1, 500, 300, 20, 20);
+		arg1.setColor(Color.red);
+		arg1.fillRect(EX, EY, 50, 50);
+
 
 		if (drawDeathScreen == true) {
 			DeathScreen.draw(0, 0);
@@ -90,10 +92,20 @@ public class AdventureGameController extends BasicGame {
 	// Logic, Update, Actual Code (physics and gravity etc...)
 	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {
+		EX = enemy.moveX(PX);
+		EY = enemy.moveY(PY);
+		
 		// gets input from keyboard
 		Input input = arg0.getInput();
 		// Moves the player using the arrow keys
 		// moves player left
+
+		// Makes hitBox for Enemy
+		if (PX + 25 > EX && PX < EX + 50 && PY + 25 > EY && PY < EY + 50) {
+			isTouching = true;
+		} else {
+			isTouching = false;
+		}
 		
 		if (drawDeathScreen != true) {
 			if (input.isKeyDown(Input.KEY_LEFT)) {
@@ -119,7 +131,7 @@ public class AdventureGameController extends BasicGame {
 		PY = tileBorder.borderHitBoxY(PY);
 
 		// If player touches Enemy
-		if (enemy.EnemyHitBox(PX, PY)) {
+		if (isTouching) {
 			drawDeathScreen = true;
 		}
 		if (drawDeathScreen == true) {
@@ -127,6 +139,10 @@ public class AdventureGameController extends BasicGame {
 				drawDeathScreen = false;
 				PX = 270;
 				PY = 270;
+				EX = 500;
+				EY = 500;
+				EX = enemy.moveX(PX);
+				EY = enemy.moveY(PY);
 			}
 		}
 
