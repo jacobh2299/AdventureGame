@@ -16,7 +16,7 @@ public class AdventureGameController extends BasicGame {
 	// Initialize all of the data members
 
 	// Player
-	int PX = 470, PY = 270;
+	int PX = 270, PY = 270;
 
 	// Initialize Border
 	TileBorder tileBorder = new TileBorder();
@@ -94,6 +94,7 @@ public class AdventureGameController extends BasicGame {
 		Input input = arg0.getInput();
 		// Moves the player using the arrow keys
 		// moves player left
+		
 		if (drawDeathScreen != true) {
 			if (input.isKeyDown(Input.KEY_LEFT)) {
 				PX -= 7;
@@ -110,6 +111,7 @@ public class AdventureGameController extends BasicGame {
 			if (input.isKeyDown(Input.KEY_DOWN)) {
 				PY += 7;
 			}
+			
 		}
 
 		// creates borders
@@ -123,7 +125,7 @@ public class AdventureGameController extends BasicGame {
 		if (drawDeathScreen == true) {
 			if (input.isKeyDown(Input.KEY_SPACE)) {
 				drawDeathScreen = false;
-				PX = 470;
+				PX = 270;
 				PY = 270;
 			}
 		}

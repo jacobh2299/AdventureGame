@@ -27,10 +27,27 @@ public class Enemy1 {
 	// Creates the Enemy hitBox
 	public boolean EnemyHitBox(int PX, int PY) {
 		boolean isTouching = false;
+		//Makes hitBox
 		if (PX + 25 > EX && PX < EX + Size1 && PY + 25 > EY && PY < EY + Size2) {
 			isTouching = true;
 		} else {
 			isTouching = false;
+		}
+		if(EX > PX)
+		{
+			EX = EX - 1;
+		}
+		if(EX < PX)
+		{
+			EX = EX + 1;
+		}
+		if(EY > PY)
+		{
+			EY = EY - 1;
+		}
+		if(EY < PY)
+		{
+			EY = EY + 1;
 		}
 		return isTouching;
 	}
