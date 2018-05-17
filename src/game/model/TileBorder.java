@@ -6,7 +6,6 @@ import org.newdawn.slick.Graphics;
 
 public class TileBorder 
 {
-	boolean isTouching;
 	public void border(Graphics arg1, int StartX, int StartY, int BorderX, int BorderY )
 	{
 		//Sets rectangle color
@@ -14,9 +13,33 @@ public class TileBorder
 		//creates border
 		arg1.fillRect(StartX, StartY, BorderX, BorderY);
 	}
-	public boolean getIsTouching()
+	//Set hit box to left and right
+	public int borderHitBoxX(int PX)
 	{
-		return isTouching;
-	}
+		if(PX < 10)
+		{
+			PX = 10;
+		}
+		if(PX > 960)
+		{
+			PX = 960;
+		}
 	
+		return PX;
+	}
+	//set border to top and bottom
+	public int borderHitBoxY(int PY)
+	{
+		//Top
+		if(PY < 10)
+		{
+			PY = 10;
+		}
+		//Bottom
+		if(PY > 560)
+		{
+			PY = 560;
+		}
+		return PY;
+	}
 }
